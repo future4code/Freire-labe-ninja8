@@ -5,7 +5,7 @@ export const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color:#FFF482 ;
+    background-color:#1db954 ;
     
     h1{
         margin-right: 1400px;
@@ -29,21 +29,21 @@ export const CartButton = styled.button`
 `
 
 export const HomeButton = styled.button`
-    background: none;
+    background: #1db954;
     border-radius: 7px;
     font-size: 15px;
-    color: #0e73e8;
+    color: #212121;
     padding: 8px;
-    border-color: #0e73e8;
+    border-color: #212121;
     border: 2px solid;
     font-weight: bold;
     transition: 160ms;
 
     :hover{
-        background-color:#0e73e8 ;
-        color: black;
-        border: none;
+        background-color:#1cd25c ;
+        color: white;
         cursor: pointer;
+        border-color:#212121;
     }
 
 `
