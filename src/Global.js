@@ -2,17 +2,16 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     *::-webkit-scrollbar {
-        width: 12px;
+        width: 5px;
 }
 
 *::-webkit-scrollbar-track {
-        background: #1db954;
+        background:#212121 ;
 }
 
 *::-webkit-scrollbar-thumb {
-        background-color: #212121;
+        background-color: #1db954;
         border-radius: 20px;
-        border: 3px solid #535353;
 }
     body {
         margin: 0;
