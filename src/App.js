@@ -5,6 +5,7 @@ import { GlobalStyle } from "./Global";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import ListServices from "./components/ListServices/List"
 import Home from "./components/Home/Home"
+import Cart from "./components/Cart/Cart"
 
 
 const AppContainer = styled.div`
@@ -30,7 +31,9 @@ export default class App extends React.Component {
         return  <RegistrationForm/>
       case "list":
         return <ListServices/>
-      default:
+      case "cart":
+        return <Cart/>
+        default:
         return <div>Erro! Página não encontrada</div>
     }
   }
@@ -47,6 +50,10 @@ export default class App extends React.Component {
     this.setState({currentPage: "menu"})
   }
 
+  goToCart = () => {
+    this.setState({currentPage: "cart"})
+  }
+
   render () {
 
     return (
@@ -55,6 +62,7 @@ export default class App extends React.Component {
         <AppContainer>
           <Header
           goToMenu={this.goToMenu}
+          goToCart={this.goToCart}
           />
           {/* <Home/> */}
           {this.ChoosePage()}

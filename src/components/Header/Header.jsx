@@ -13,7 +13,7 @@ export default class index extends Component {
                     <HomeButton onClick={this.props.goToMenu}>Página inicial</HomeButton>
                 </div>
                 <div>
-                    <CartButton> <img src='https://cdn-icons-png.flaticon.com/512/1170/1170678.png' height ="40" width="40"></img></CartButton>
+                    <CartButton onClick={this.props.goToCart}> <img src='https://cdn-icons-png.flaticon.com/512/1170/1170678.png' height ="40" width="40"></img></CartButton>
                 </div>
             </HeaderContainer>
         )
