@@ -12,6 +12,7 @@ export default class index extends React.Component {
     arrayDeServicos: [],
     filtroValorMinimo: 1,
     filtroValorMaximo: 100000,
+    ordenaPorPreco: "crescente"
   };
 
   onChangeValorMinimo = (event) => {
@@ -25,6 +26,11 @@ export default class index extends React.Component {
     });
   };
 
+  onChangePreco = (event) => {
+    this.setState({
+      ordenaPorPreco: event.target.value,
+    });
+  }
   componentDidMount() {
     this.pegaServicos();
   }
@@ -40,6 +46,7 @@ export default class index extends React.Component {
         console.log(error.response);
       });
   };
+
   render() {
     const servicosFiltrados = this.state.arrayDeServicos.filter((servico) => {
       return (
@@ -48,17 +55,44 @@ export default class index extends React.Component {
       );
     });
 
-    const mapearArray = this.state.servicosFiltrados?.map((servico, index) => (
-      <Card key={index}>
-        {servico.title}
-        {servico.dueDate}
-        {servico.price}
-        <button> ver Detalhes </button>
-      </Card>
-    ));
+    const ordenaPreco = servicosFiltrados.sort((a, b) => {
+      switch(this.state.ordenaPorPreco) {
+        case "crescente":
+          return a.price - b.price;
+        case "decrescente":
+          return b.price - a.price;
+        case "titulo":
+          return;
+        case "prazo":
+          return new Date(a.dueDate).getTime() > new Date(b.dueDate).getTime()
+          ? 1 : -1;
+        default:
+          return true;
+      }
+    })
 
+    const mapearArray = ordenaPreco.map((servico, index) => 
+    {
+      const data = `${servico.dueDate.slice(8, 10)}/${servico.dueDate.slice(5, 7)}/${servico.dueDate.slice(0, 4)}`
+      return (      
+        <Card key={index}>
+          {servico.title}
+          {data}
+          {servico.price}
+          <button> ver Detalhes </button>
+        </Card>
+      )});
+  
+    
+    
     return (
       <div>
+        <select onChange={this.onChangePreco}>
+          <option value="crescente">Crescente</option>
+          <option value="decrescente">Decrescente</option>
+          <option value="titulo">Título</option>
+          <option value="prazo">Prazo</option>
+        </select>
         <h1>LISTA</h1>
         <ListContainer>{mapearArray}</ListContainer>
         <input
