@@ -9,10 +9,10 @@ const headers = {
 
 export default class index extends React.Component {
   state = {
-    arrayDeServicos: [],
     filtroValorMinimo: 1,
     filtroValorMaximo: 100000,
-    ordenaPorPreco: "crescente"
+    ordenaPorPreco: "crescente",
+    arrayDeServicos: [],
   };
 
   onChangeValorMinimo = (event) => {
@@ -47,6 +47,18 @@ export default class index extends React.Component {
       });
   };
 
+  adicionaItem = (event) => {
+    const idServico = Number(event.target.id)
+    const novaListaDeServicos = this.state.arrayDeServicos.map((servico) => {
+     if (servico.id === idServico) {
+      return servico 
+     }
+    })
+    this.setState ({
+      arrayDeServicos: novaListaDeServicos
+    })
+  }
+
   render() {
     const servicosFiltrados = this.state.arrayDeServicos.filter((servico) => {
       return (
@@ -76,14 +88,16 @@ export default class index extends React.Component {
       const data = `${servico.dueDate.slice(8, 10)}/${servico.dueDate.slice(5, 7)}/${servico.dueDate.slice(0, 4)}`
       return (      
         <Card key={index}>
-          {servico.title}
-          {data}
-          {servico.price}
-          <button> ver Detalhes </button>
+          {servico.title} <br></br> <br></br> 
+          {data} <br></br> <br></br>
+          {servico.price} <br></br> <br></br> 
+          <button> ver Detalhes </button> 
+          <button onClick={() => this.adicionaItem(servico.id)}>🛒</button>
+          {/* <div>
+          servicos = {[...this.state.arrayDeServicos]}
+        </div> */}
         </Card>
       )});
-  
-    
     
     return (
       <div>
@@ -93,17 +107,21 @@ export default class index extends React.Component {
           <option value="titulo">Título</option>
           <option value="prazo">Prazo</option>
         </select>
-        <h1>LISTA</h1>
-        <ListContainer>{mapearArray}</ListContainer>
         <input
           value={this.state.filtroValorMinimo}
           onChange={this.onChangeValorMinimo}
+          placeholder="Valor Mínimo"
         />
         <input
           value={this.state.filtroValorMaximo}
           onChange={this.onChangeValorMaximo}
+          placeholder="Valor Máximo"
         />
+        <h1>LISTA</h1>
+        <ListContainer>{mapearArray}</ListContainer>
+    
       </div>
+
     );
   }
 }
