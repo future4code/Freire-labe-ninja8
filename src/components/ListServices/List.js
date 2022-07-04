@@ -117,7 +117,6 @@ export default class index extends React.Component {
           onChange={this.onChangeValorMaximo}
           placeholder="Valor Máximo"
         />
-        <h1>LISTA</h1>
         <ListContainer>{mapearArray}</ListContainer>
     
       </div>
